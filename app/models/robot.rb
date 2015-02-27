@@ -4,15 +4,14 @@ class Robot < ActiveRecord::Base
   def self.find_victims number, words
 
     # find tweets
-    Client.search(words, lang: "en").take(number).each { |t|    
-    
+    Client.search(words, lang: "en").take(number).each { |t|
 
       # record twitter user and tweet num.
       if Victim.where(name: t.user.screen_name).count == 0
         # add to table
         Victim.create(name: t.user.screen_name, tweet_id: t.id.to_s)
         # tweet them        
-        Client.update(Robot.flirt(t.user.screen_name), in_reply_to_status_id: t.id)
+        Client.update(Robot.flirt(t.user.screen_name, true), in_reply_to_status_id: t.id)
       end
 
     }
@@ -20,14 +19,18 @@ class Robot < ActiveRecord::Base
   end
 
   # code to randomly generate a flirty message
-  def self.flirt name
-    flirt_to_send = Flirt.where(sent_before: false).order_by_rand.first  
+  def self.flirt name, opening_line
+    flirt_to_send = Flirt.where(opening_line: opening_line, sent_before: false).order_by_rand.first  
 
     flirt_to_send.update_attributes(sent_before: true)
 
     message = "@" + name + " " + flirt_to_send.message 
 
   end
+
+  def self.last_search
+    Client.user_timeline("@funktimefreddie").first.id
+  end 
 
   # code to receive suggestions for flirty messages
   def self.suggestions
@@ -59,10 +62,26 @@ class Robot < ActiveRecord::Base
 
   end
 
-  # check for responses from victimes
-  def check_responses
 
-  end
+
+  def self.run_responses
+
+    Client.search("@funktimefreddie", since_id: Robot.last_search).each { |t|
+      byebug
+
+      if t.hashtags.include? "#fredflirts" 
+      else
+
+        name = t.user.screen_name
+        tweet_id = t.id          
+        Client.update(Robot.flirt(t.user.screen_name, false), in_reply_to_status_id: t.id)
+        Victim.create(name: name, tweet_id: t.id)
+         
+      end      
+
+    }
+  end 
+
 
 
 
