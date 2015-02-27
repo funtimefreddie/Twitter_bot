@@ -1,7 +1,22 @@
 class Robot < ActiveRecord::Base
 
+  # define where to search from
+  def self.last_search
+    Client.user_timeline("@funktimefreddie").first.id
+    # Client.mentions_timeline.first.text
+  end
+
+   # generate a flirty message
+  def self.flirt name, opening_line
+    flirt_to_send = Flirt.where(opening_line: opening_line, sent_before: false).order_by_rand.first  
+
+    flirt_to_send.update_attributes(sent_before: true)
+
+    message = "@" + name + " " + flirt_to_send.message 
+  end 
+
   # code to find homophobic tweets and respond to them
-  def self.find_victims number, words
+  def self.start_convo number, words
 
     # find tweets
     Client.search(words, lang: "en").take(number).each { |t|
@@ -17,23 +32,10 @@ class Robot < ActiveRecord::Base
     }
 
   end
-
-  # code to randomly generate a flirty message
-  def self.flirt name, opening_line
-    flirt_to_send = Flirt.where(opening_line: opening_line, sent_before: false).order_by_rand.first  
-
-    flirt_to_send.update_attributes(sent_before: true)
-
-    message = "@" + name + " " + flirt_to_send.message 
-
-  end
-
-  def self.last_search
-    Client.user_timeline("@funktimefreddie").first.id
-  end 
+ 
 
   # code to receive suggestions for flirty messages
-  def self.suggestions
+  def self.get_suggestions
 
     hashtag = "#fredflirts"   
 
@@ -62,11 +64,11 @@ class Robot < ActiveRecord::Base
 
   end
 
-
-
+  # respond to mentions
   def self.run_responses
 
-    Client.search("@funktimefreddie", since_id: Robot.last_search).each { |t|
+    # Client.search("@funktimefreddie", since_id: Robot.last_search).each { |t|
+     Client.mentions_timeline(since_id: Robot.last_search).each { |t|
       byebug
 
       if t.hashtags.include? "#fredflirts" 
@@ -81,9 +83,6 @@ class Robot < ActiveRecord::Base
 
     }
   end 
-
-
-
 
 
 
