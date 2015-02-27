@@ -4,14 +4,15 @@ class Robot < ActiveRecord::Base
   def self.find_victims number, words
 
     # find tweets
-    Client.search(words, lang: "en").take(number).each { |t|
+    Client.search(words, lang: "en").take(number).each { |t|    
+    
 
       # record twitter user and tweet num.
       if Victim.where(name: t.user.screen_name).count == 0
         # add to table
         Victim.create(name: t.user.screen_name, tweet_id: t.id.to_s)
-        # tweet them
-        Client.update(Robot.flirt(t.user.screen_name, true), in_reply_to_status_id: t.id)
+        # tweet them        
+        Client.update(Robot.flirt(t.user.screen_name), in_reply_to_status_id: t.id)
       end
 
     }
@@ -19,8 +20,13 @@ class Robot < ActiveRecord::Base
   end
 
   # code to randomly generate a flirty message
-  def self.flirt name, opening_line
-    "@" + name + " " + Flirt.where(opening_line: opening_line).order_by_rand.first.message 
+  def self.flirt name
+    flirt_to_send = Flirt.where(sent_before: false).order_by_rand.first  
+
+    flirt_to_send.update_attributes(sent_before: true)
+
+    message = "@" + name + " " + flirt_to_send.message 
+
   end
 
   # code to receive suggestions for flirty messages
