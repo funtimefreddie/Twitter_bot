@@ -23,7 +23,7 @@ namespace :robot do
     if Robot.have_responses
       Robot.run_responses
     else   
-      Robot.start_convo(1, "fucking faggots")
+      Robot.start_convo(1, "faggots hate")
     end
   end
 
