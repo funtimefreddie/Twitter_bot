@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'randumb'
+gem 'seed_dump'
 
 gem 'figaro'
 gem 'twitter'
