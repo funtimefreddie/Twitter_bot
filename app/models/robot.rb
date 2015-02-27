@@ -37,19 +37,16 @@ class Robot < ActiveRecord::Base
   # code to receive suggestions for flirty messages
   def self.get_suggestions
 
-    hashtag = "#fredflirts"   
+    hashtag = "#fredflirts"      
 
     #search from last tweet, if exists
-    if Flirt.where(suggested: true).count == 0
-      since_id = 0
-    else
-      since_id = Flirt.where(suggested: true).last.tweet_id
-    end
+    since_id = Flirt.where(suggested: true).last.tweet_id.to_i
 
     #loop new tweets
-    Client.search(hashtag, since_id: since_id).each do |t|
+    Client.search(hashtag, since_id: since_id).each { |t|
 
-       # strip hashtag from message    
+       # strip hashtag from message   
+    if t.user.screen_name != "funktimefreddie"     
       message = t.text.gsub(hashtag, "")
       message = message.gsub("@funktimefreddie", "").strip!          
 
@@ -59,8 +56,9 @@ class Robot < ActiveRecord::Base
       if Flirt.where(message: message).count == 0
         Flirt.create(message: message, opening_line: is_question, suggested: true, tweet_id: t.id.to_s)
       end
-
     end
+
+    }
 
   end
 
