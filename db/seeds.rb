@@ -1,3 +1,6 @@
+Flirt.delete_all
+Victim.delete_all
+
 Flirt.create!([
   {message: "Darling! It's me, Freddie T. Remember our summer at gay camp?", opening_line: true, suggested: false, tweet_id: nil, sent_before: true},
   {message: "Please stop sending me private messages telling me you want to 'bum' me...I have a boyfriend, and he is hot diggedy damn!!", opening_line: true, suggested: false, tweet_id: nil, sent_before: true},
