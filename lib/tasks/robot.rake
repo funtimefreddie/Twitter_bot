@@ -2,7 +2,7 @@ namespace :robot do
 
   desc "TODO"
   task find: :environment do
-    Robot.run_responses
+    Robot.start_convo
   end
 
   desc "TODO"
@@ -13,6 +13,18 @@ namespace :robot do
   desc "TODO"
   task get_flirt: :environment do
     Robot.get_suggestions
+  end
+
+  desc "TODO"
+  task do_ya_thing: :environment do
+
+    Robot.get_suggestions
+
+    if Robot.have_responses
+      Robot.run_responses
+    else   
+      Robot.start_convo(1, "fucking faggots")
+    end
   end
 
   # desc "TODO"

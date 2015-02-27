@@ -25,7 +25,7 @@ class Robot < ActiveRecord::Base
       if Victim.where(name: t.user.screen_name).count == 0
         # add to table
         Victim.create(name: t.user.screen_name, tweet_id: t.id.to_s)
-        # tweet them        
+        # tweet them                
         Client.update(Robot.flirt(t.user.screen_name, true), in_reply_to_status_id: t.id)
       end
 
@@ -64,12 +64,15 @@ class Robot < ActiveRecord::Base
 
   end
 
+  def self.have_responses
+    return Client.mentions_timeline(since_id: Robot.last_search).count > 0
+  end
+
   # respond to mentions
   def self.run_responses
 
     # Client.search("@funktimefreddie", since_id: Robot.last_search).each { |t|
-     Client.mentions_timeline(since_id: Robot.last_search).each { |t|
-      byebug
+     Client.mentions_timeline(since_id: Robot.last_search).each { |t|      
 
       if t.hashtags.include? "#fredflirts" 
       else
