@@ -11,13 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150225073806) do
+ActiveRecord::Schema.define(version: 20150227013329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "flirts", force: :cascade do |t|
+    t.string   "message"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.boolean  "opening_line"
+  end
+
+  create_table "robots", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "victims", force: :cascade do |t|
+    t.string   "name"
+    t.string   "tweet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

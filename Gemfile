@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'randumb'
+
 gem 'figaro'
 gem 'twitter'
+gem 'awesome_print'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  require 'twitter'
+
   # GET /users
   # GET /users.json
   def index
@@ -26,8 +28,17 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
+    client = Twitter::REST::Client.new do |config|
+      config.consumer_key = ENV['CONSUMER_KEY']
+      config.consumer_secret = ENV['CONSUMER_SECRET']
+      config.access_token = ENV['YOUR_ACCESS_TOKEN']
+      config.access_token_secret = ENV['YOUR_ACCESS_SECRET']
+    end
+   
+
     respond_to do |format|
       if @user.save
+        @client.update(@user.welcome)
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
