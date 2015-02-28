@@ -2,7 +2,7 @@ namespace :robot do
 
   desc "sends a tweet "
   task find: :environment do
-    Robot.start_convo(1, "faggots die")
+    Robot.start_convo(3, "faggots die")
   end
 
   desc "responds to all responses"
