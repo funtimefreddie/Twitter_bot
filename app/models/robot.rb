@@ -8,8 +8,12 @@ class Robot < ActiveRecord::Base
 
    # generate a flirty message
   def self.flirt name, opening_line
-    flirt_to_send = Flirt.where(opening_line: opening_line, sent_before: false).order_by_rand.first  
 
+    # if Flirt.where(sent_before: false).count ==0
+    #   Robot.reset_flirts
+    # end
+
+    flirt_to_send = Flirt.where(opening_line: opening_line, sent_before: false).order_by_rand.first  
     flirt_to_send.update_attributes(sent_before: true)
 
     message = "@" + name + " " + flirt_to_send.message 
@@ -84,6 +88,10 @@ class Robot < ActiveRecord::Base
 
     }
   end 
+
+  def self.reset_flirts
+    Flirt.update_all(sent_before: false)
+  end
 
 
 
