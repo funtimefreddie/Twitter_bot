@@ -1,35 +1,31 @@
 namespace :robot do
 
-  desc "TODO"
+  desc "sends a tweet "
   task find: :environment do
-    Robot.start_convo(2, "faggots hate")
+    Robot.start_convo(1, "faggots die")
   end
 
-  desc "TODO"
+  desc "responds to all responses"
   task respond: :environment do
     Robot.run_responses
   end  
 
-  desc "TODO"
+  desc "looks for flirt suggestions"
   task get_flirt: :environment do
     Robot.get_suggestions
   end
 
-  desc "TODO"
+  desc "does everything"
   task do_ya_thing: :environment do
 
     Robot.get_suggestions
 
-    if Robot.have_responses
-      Robot.run_responses
-    else   
-      Robot.start_convo(1, "faggots hate")
+    count = Robot.run_responses
+     
+    if count == 0
+      Robot.start_convo(1, "faggots die")
     end
-  end
 
-  desc "TODO"
-  task test: :environment do    
-    Flirt.create(message: "test")
   end
 
 end
