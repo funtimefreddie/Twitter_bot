@@ -15,21 +15,21 @@ namespace :robot do
     Robot.get_suggestions
   end
 
-  # desc "TODO"
-  # task do_ya_thing: :environment do
+  desc "TODO"
+  task do_ya_thing: :environment do
 
-  #   Robot.get_suggestions
+    Robot.get_suggestions
 
-  #   if Robot.have_responses
-  #     Robot.run_responses
-  #   else   
-  #     Robot.start_convo(1, "faggots hate")
-  #   end
-  # end
+    if Robot.have_responses
+      Robot.run_responses
+    else   
+      Robot.start_convo(2, "faggots hate")
+    end
+  end
 
-  # desc "TODO"
-  # task test: :environment do    
-  #   Flirt.create(message: "test")
-  # end
+  desc "TODO"
+  task test: :environment do    
+    Flirt.create(message: "test")
+  end
 
 end

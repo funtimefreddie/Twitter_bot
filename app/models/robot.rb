@@ -76,7 +76,7 @@ class Robot < ActiveRecord::Base
     # Client.search("@funktimefreddie", since_id: Robot.last_search).each { |t|
      Client.mentions_timeline(since_id: Robot.last_search).each { |t|      
 
-      if t.hashtags.include? "#fredflirts" 
+      if t.text.include? "#fredflirts" 
       else
 
         name = t.user.screen_name
