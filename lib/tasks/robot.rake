@@ -2,7 +2,9 @@ namespace :robot do
 
   desc "sends a tweet "
   task find: :environment do
-    Robot.start_convo(3, "faggots die")
+    if rand < 0.2
+      Robot.start_convo(1, "fucking gay faggots")
+    end
   end
 
   desc "responds to all responses"
@@ -15,17 +17,17 @@ namespace :robot do
     Robot.get_suggestions
   end
 
-  desc "does everything"
-  task do_ya_thing: :environment do
+  # desc "does everything"
+  # task do_ya_thing: :environment do
 
-    Robot.get_suggestions
+  #   Robot.get_suggestions
 
-    count = Robot.run_responses
+  #   count = Robot.run_responses
      
-    if count == 0
-      Robot.start_convo(1, "faggots die")
-    end
+  #   if count == 0
+  #     Robot.start_convo(1, "faggots die")
+  #   end
 
-  end
+  # end
 
 end
