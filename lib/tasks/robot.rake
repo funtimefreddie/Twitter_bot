@@ -2,8 +2,8 @@ namespace :robot do
 
   desc "sends a tweet "
   task find: :environment do
-    if rand < 0.2
-      Robot.start_convo(1, "fucking gay faggots")
+    if rand < 0.175
+      Robot.start_convo(1, "faggots die")
     end
   end
 
