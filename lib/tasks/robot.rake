@@ -4,7 +4,7 @@ namespace :robot do
   task find: :environment do
     rand_variable = rand
     if rand_variable > 0.9
-      Robot.start_convo(1, "faggots die")
+      Robot.start_convo(1, "I hate fags")
     end
   end
 
