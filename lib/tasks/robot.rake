@@ -3,7 +3,7 @@ namespace :robot do
   desc "sends a tweet "
   task find: :environment do
     rand_variable = rand
-    if rand_variable > 0.9
+    if rand_variable < 0.175
       Robot.start_convo(1, "I hate fags")
     end
   end
