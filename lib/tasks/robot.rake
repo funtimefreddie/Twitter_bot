@@ -1,5 +1,7 @@
 namespace :robot do
 
+  # search for homophobic tweets and send them a message
+  # set up to run every hour and a random variable - e.g. there is a 17.5% chance each hour he will send a tweet
   desc "sends a tweet "
   task find: :environment do
     rand_variable = rand
@@ -8,27 +10,16 @@ namespace :robot do
     end
   end
 
+  # respond to people who have tweeted back
   desc "responds to all responses"
   task respond: :environment do
     Robot.run_responses
-  end  
+  end 
 
+  # pick up any suggestions
   desc "looks for flirt suggestions"
   task get_flirt: :environment do
     Robot.get_suggestions
   end
-
-  # desc "does everything"
-  # task do_ya_thing: :environment do
-
-  #   Robot.get_suggestions
-
-  #   count = Robot.run_responses
-     
-  #   if count == 0
-  #     Robot.start_convo(1, "faggots die")
-  #   end
-
-  # end
 
 end

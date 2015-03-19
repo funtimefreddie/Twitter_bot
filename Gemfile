@@ -1,10 +1,14 @@
 source 'https://rubygems.org'
 
+# generates random table entry
 gem 'randumb'
+# dumps all table data into seeds file
 gem 'seed_dump'
 
-gem 'figaro'
 gem 'twitter'
+
+gem 'figaro'
+
 gem 'awesome_print'
 
 

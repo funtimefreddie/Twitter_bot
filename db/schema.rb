@@ -11,19 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227061730) do
+ActiveRecord::Schema.define(version: 20150319122406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "flirts", force: :cascade do |t|
     t.string   "message"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.boolean  "opening_line"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.boolean  "suggested"
     t.string   "tweet_id"
-    t.boolean  "sent_before",  default: false
+    t.boolean  "sent_before", default: false
   end
 
   create_table "robots", force: :cascade do |t|
