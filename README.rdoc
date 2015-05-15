@@ -1,5 +1,15 @@
-Freddie Tamagoochi is a twitter 'bot' who searches for people sending homophobic tweets and sends them a flirty or patronising response.
-If they, in turn, respond then he will continue to engage in a conversation with them until they stop - hopefully winding them up in the process
-To play along, you can also tweet him suggestions for messages to send using the hashtag #fredflirts.
+INTRO:
 
-The main files to update are the seeds file (to add more messages) and the robot.rake file - to control what key words to look for and how often to send and respond to tweets
+- Freddie Tamagoochi (FT) is a twitter 'bot' who searches for people sending homophobic tweets and sends them a flirty or patronising response.
+- If they, in turn, respond then he will continue to engage in a conversation with them until they stop - hopefully winding them up in the process
+- To play along, you can also tweet him suggestions for messages to send using the hashtag #fredflirts.
+
+HOW TO USE:
+
+- Update the seeds file to add more messages for FT to send
+- Update the robot.rake file to update which keywords what key words to look for and how often to send and respond to tweets
+- Methods used by the rake file are contained in the robot.rb file
+
+FUNCTIONALITY DEMONSTRATED:
+- custom rakes
+- twitter API

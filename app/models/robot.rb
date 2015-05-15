@@ -66,7 +66,7 @@ class Robot < ActiveRecord::Base
   end
 
 
-  # respond to mentions
+  # search resonpses to my tweets and tweet back
   def self.run_responses
 
     count = 0    
@@ -78,9 +78,11 @@ class Robot < ActiveRecord::Base
       if t.text.include? "#fredflirts" 
       else
 
+        # send them a message
         name = t.user.screen_name
         tweet_id = t.id          
         Client.update(Robot.flirt(t.user.screen_name, false), in_reply_to_status_id: t.id)
+        # record that we've tweeted them again
         Victim.create(name: name, tweet_id: t.id)
         count += 1
          
@@ -92,7 +94,7 @@ class Robot < ActiveRecord::Base
 
   end 
 
-  # resets flirts to use again
+  # resets flirt messages so they can be used again
   def self.reset_flirts
     Flirt.update_all(sent_before: false)
   end
