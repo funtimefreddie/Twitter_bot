@@ -1,15 +1,21 @@
 INTRO:
 
-- Freddie Tamagoochi (FT) is a twitter 'bot' who searches for people sending homophobic tweets and sends them a flirty or patronising response.
-- If they, in turn, respond then he will continue to engage in a conversation with them until they stop - hopefully winding them up in the process
-- To play along, you can also tweet him suggestions for messages to send using the hashtag #fredflirts.
-
+- This app can be used to target tweeters using specific words in their tweets, and send them automated messages
+- This was inspired by the late 'Freddie Tamagoochi' who searched for people sending homophobic tweets and sends them a flirty or patronising response.
+- Once the 'victim', in turn, responds then he/she will continue to engage in a conversation with them until they stop - hopefully winding them up in the process
+- For others to play along, you can invite friends to suggest new messages using a particular hashtag (currently '#fredflirts' - which can be changed in the robot.rb file)
+    
 HOW TO USE:
 
-- Update the seeds file to add more messages for FT to send
+- Update the seeds file with message you want to send from your 'bot'
+- Create an 'application.yml' file with the figaro gem and define your Twitter API tokens, example as follows (dummy values below)
+  CONSUMER_KEY: bvDfgh9Ajvm3TKDz29sV2aixp
+  CONSUMER_SECRET: VGU1xPunCjz9vLYPi0mg7W8cPIyIbwkwg15RrsUFQEVVbdozW2
+  YOUR_ACCESS_TOKEN: 3039033547-Pzs-WkUDJmDXrXsGzZH1KtA7a3dEIcr3lMVLkoe
+  YOUR_ACCESS_SECRET: tBbuJ1nacjyJQYYHE4tdEjX0799wiyZ87hQA2seYyQEf3
 - Update the robot.rake file to update which keywords what key words to look for and how often to send and respond to tweets
-- Methods used by the rake file are contained in the robot.rb file
+- (Methods used by the rake file are contained in the robot.rb file)
 
 FUNCTIONALITY DEMONSTRATED:
-- custom rakes
 - twitter API
+- custom rakes

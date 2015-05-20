@@ -1,0 +1,1 @@
+Flirt.create(message: "Automated message coming at you"), sent_before: false, suggested: false)
